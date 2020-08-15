@@ -12,10 +12,10 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.121/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.121/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.122' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.123' /etc/hosts
-echo 'nameserver 10.0.0.10' >> /etc/resolv.conf
+echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.122' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.123' >> /etc/hosts
+echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 yum install java -y
 
@@ -29,10 +29,10 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.122/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.122/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.122' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.123' /etc/hosts
-echo 'nameserver 10.0.0.10' >> /etc/resolv.conf
+echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.122' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.123' >> /etc/hosts
+echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 yum install java -y
 
@@ -44,9 +44,9 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.123/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.123/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.122' /etc/hosts
-echo 'HADOOP1.corp.hq  10.0.0.123' /etc/hosts
-echo 'nameserver 10.0.0.10' >> /etc/resolv.conf
+echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.122' >> /etc/hosts
+echo 'HADOOP1.corp.hq  10.0.0.123' >> /etc/hosts
+echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 yum install java -y
