@@ -17,8 +17,18 @@ echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
 echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
+firewall-cmd --set-default=drop
+firewall-cmd --remove-interface=enp0s3 --zone=public
+firewall-cmd --remove-interface=enp0s8 --zone=public
+firewall-cmd --add-interface=enp0s3 --zone=drop
+firewall-cmd --add-interface=enp0s8 --zone=drop
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --reload
+firewall-cmd --list-all
+
 yum install java -y
 
+https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz
 
 
 ###############
@@ -34,6 +44,15 @@ echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
 echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
+firewall-cmd --set-default=drop
+firewall-cmd --remove-interface=enp0s3 --zone=public
+firewall-cmd --remove-interface=enp0s8 --zone=public
+firewall-cmd --add-interface=enp0s3 --zone=drop
+firewall-cmd --add-interface=enp0s8 --zone=drop
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --reload
+firewall-cmd --list-all
+
 yum install java -y
 
 ###############
@@ -48,5 +67,14 @@ echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
 echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
 echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
+
+firewall-cmd --set-default=drop
+firewall-cmd --remove-interface=enp0s3 --zone=public
+firewall-cmd --remove-interface=enp0s8 --zone=public
+firewall-cmd --add-interface=enp0s3 --zone=drop
+firewall-cmd --add-interface=enp0s8 --zone=drop
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --reload
+firewall-cmd --list-all
 
 yum install java -y
