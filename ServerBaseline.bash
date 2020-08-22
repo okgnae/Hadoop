@@ -26,6 +26,26 @@ firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192
 firewall-cmd --reload
 firewall-cmd --list-all
 
+cat << EOF > /etc/yum.repos.d/CentOS-Local.repo
+name=CentOS-Local-Base
+baseurl=http://10.0.0.10/yum/centos/base/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Extras]
+name=CentOS-Local-Extras
+baseurl=http://10.0.0.10/yum/centos/extras/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Updates]
+name=CentOS-Local-Updates
+baseurl=http://10.0.0.10/yum/centos/updates/Packages
+gpgcheck=0
+enabled=1
+EOF
+
+yum update -y
 yum install java -y
 
 https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz
@@ -53,6 +73,23 @@ firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192
 firewall-cmd --reload
 firewall-cmd --list-all
 
+name=CentOS-Local-Base
+baseurl=http://10.0.0.10/yum/centos/base/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Extras]
+name=CentOS-Local-Extras
+baseurl=http://10.0.0.10/yum/centos/extras/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Updates]
+name=CentOS-Local-Updates
+baseurl=http://10.0.0.10/yum/centos/updates/Packages
+gpgcheck=0
+enabled=1
+
 yum install java -y
 
 ###############
@@ -76,5 +113,22 @@ firewall-cmd --add-interface=enp0s8 --zone=drop
 firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
 firewall-cmd --reload
 firewall-cmd --list-all
+
+name=CentOS-Local-Base
+baseurl=http://10.0.0.10/yum/centos/base/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Extras]
+name=CentOS-Local-Extras
+baseurl=http://10.0.0.10/yum/centos/extras/Packages
+gpgcheck=0
+enabled=1
+
+[CentOS-Local-Updates]
+name=CentOS-Local-Updates
+baseurl=http://10.0.0.10/yum/centos/updates/Packages
+gpgcheck=0
+enabled=1
 
 yum install java -y
