@@ -48,7 +48,8 @@ EOF
 yum update -y
 yum install java -y
 
-https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz
+curl --url https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
+
 
 
 ###############
@@ -92,6 +93,8 @@ enabled=1
 
 yum install java -y
 
+curl --url https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
+
 ###############
 ### Hadoop3 ###
 ###############
@@ -132,3 +135,5 @@ gpgcheck=0
 enabled=1
 
 yum install java -y
+
+curl --url https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
