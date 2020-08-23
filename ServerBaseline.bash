@@ -50,6 +50,23 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
+
+useradd -u 990 -M -U hadoop -s /sbin/nologin
+
+cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
+
+tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
+
+mv /opt/hadoop-3.3.0/ /opt/hadoop/
+
+sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
+
+cat << EOF > /etc/profile.d/hadoopEnv.sh
+HADOOP_HOME=/opt/hadoop
+export HADOOP_HOME
+export PATH=\${PATH}:\${HADOOP_HOME}/bin
+EOF
+
 ###############
 ### Hadoop2 ###
 ###############
@@ -94,6 +111,23 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
+
+useradd -u 990 -M -U hadoop -s /sbin/nologin
+
+cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
+
+tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
+
+mv /opt/hadoop-3.3.0/ /opt/hadoop/
+
+sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
+
+cat << EOF > /etc/profile.d/hadoopEnv.sh
+HADOOP_HOME=/opt/hadoop
+export HADOOP_HOME
+export PATH=\${PATH}:\${HADOOP_HOME}/bin
+EOF
+
 ###############
 ### Hadoop3 ###
 ###############
@@ -137,3 +171,20 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
+
+
+useradd -u 990 -M -U hadoop -s /sbin/nologin
+
+cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
+
+tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
+
+mv /opt/hadoop-3.3.0/ /opt/hadoop/
+
+sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
+
+cat << EOF > /etc/profile.d/hadoopEnv.sh
+HADOOP_HOME=/opt/hadoop
+export HADOOP_HOME
+export PATH=\${PATH}:\${HADOOP_HOME}/bin
+EOF
