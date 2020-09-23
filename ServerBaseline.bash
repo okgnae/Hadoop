@@ -31,13 +31,11 @@ name=CentOS-Local-Base
 baseurl=http://10.0.0.10/yum/centos/base/Packages
 gpgcheck=0
 enabled=1
-
 [CentOS-Local-Extras]
 name=CentOS-Local-Extras
 baseurl=http://10.0.0.10/yum/centos/extras/Packages
 gpgcheck=0
 enabled=1
-
 [CentOS-Local-Updates]
 name=CentOS-Local-Updates
 baseurl=http://10.0.0.10/yum/centos/updates/Packages
@@ -49,7 +47,6 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
-
 
 useradd -u 990 -M -U hadoop -s /sbin/nologin
 
@@ -111,7 +108,6 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
-
 useradd -u 990 -M -U hadoop -s /sbin/nologin
 
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
@@ -171,7 +167,6 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
-
 
 useradd -u 990 -M -U hadoop -s /sbin/nologin
 
