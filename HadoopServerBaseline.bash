@@ -48,7 +48,7 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
-useradd -u 990 -M -U hadoop -s /sbin/nologin
+useradd -u 990 -M -U hadoop -s /bin/bash
 
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
 
@@ -108,7 +108,7 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
-useradd -u 990 -M -U hadoop -s /sbin/nologin
+useradd -u 990 -M -U hadoop -s /bin/bash
 
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
 
@@ -168,7 +168,7 @@ yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
 
-useradd -u 990 -M -U hadoop -s /sbin/nologin
+useradd -u 990 -M -U hadoop -s /bin/bash
 
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
 
