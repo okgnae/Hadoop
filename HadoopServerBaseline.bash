@@ -1,7 +1,7 @@
 ### Hadoop Server Baseline
-# 192.168.1.121 | 10.0.0.121 | HADOOP1.hq.corp | Hadoop | CentOS 7
-# 192.168.1.122 | 10.0.0.122 | HADOOP2.hq.corp | Hadoop | CentOS 7
-# 192.168.1.123 | 10.0.0.123 | HADOOP3.hq.corp | Hadoop | CentOS 7
+# 192.168.1.121 | 10.0.0.121 | HADOOP1.hq.corp | Hadoop Master Node 1| CentOS 7
+# 192.168.1.122 | 10.0.0.122 | HADOOP2.hq.corp | Hadoop Node 1| CentOS 7
+# 192.168.1.123 | 10.0.0.123 | HADOOP3.hq.corp | Hadoop Node 2| CentOS 7
 
 ###############
 ### Hadoop1 ###
@@ -12,9 +12,12 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.121/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.121/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
-echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
-echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
+echo '' > /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '' > /etc/resolv.conf
+echo 'search corp.hq' >> /etc/resolv.conf
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 firewall-cmd --set-default=drop
@@ -23,6 +26,9 @@ firewall-cmd --remove-interface=enp0s8 --zone=public
 firewall-cmd --add-interface=enp0s3 --zone=drop
 firewall-cmd --add-interface=enp0s8 --zone=drop
 firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.121" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.122" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.123" service name="ssh" accept'
 firewall-cmd --reload
 firewall-cmd --list-all
 
@@ -47,13 +53,8 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
-
-useradd -u 990 -M -U hadoop -s /bin/bash
-
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
-
 tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
-
 mv /opt/hadoop-3.3.0/ /opt/hadoop/
 
 sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
@@ -63,6 +64,8 @@ HADOOP_HOME=/opt/hadoop
 export HADOOP_HOME
 export PATH=\${PATH}:\${HADOOP_HOME}/bin
 EOF
+
+reboot
 
 ###############
 ### Hadoop2 ###
@@ -72,9 +75,12 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.122/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.122/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
-echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
-echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
+echo '' > /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '' > /etc/resolv.conf
+echo 'search corp.hq' >> /etc/resolv.conf
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 firewall-cmd --set-default=drop
@@ -83,6 +89,9 @@ firewall-cmd --remove-interface=enp0s8 --zone=public
 firewall-cmd --add-interface=enp0s3 --zone=drop
 firewall-cmd --add-interface=enp0s8 --zone=drop
 firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.121" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.122" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.123" service name="ssh" accept'
 firewall-cmd --reload
 firewall-cmd --list-all
 
@@ -107,13 +116,8 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
-
-useradd -u 990 -M -U hadoop -s /bin/bash
-
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
-
 tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
-
 mv /opt/hadoop-3.3.0/ /opt/hadoop/
 
 sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
@@ -123,6 +127,8 @@ HADOOP_HOME=/opt/hadoop
 export HADOOP_HOME
 export PATH=\${PATH}:\${HADOOP_HOME}/bin
 EOF
+
+reboot
 
 ###############
 ### Hadoop3 ###
@@ -132,9 +138,12 @@ sed -i 's/IPADDR=.*/IPADDR=192.168.1.123/' /etc/sysconfig/network-scripts/ifcfg-
 sed -i 's/IPADDR=.*/IPADDR=10.0.0.123/' /etc/sysconfig/network-scripts/ifcfg-enp0s8
 systemctl restart network
 
-echo 'HADOOP1.corp.hq  10.0.0.121' >> /etc/hosts
-echo 'HADOOP2.corp.hq  10.0.0.122' >> /etc/hosts
-echo 'HADOOP3.corp.hq  10.0.0.123' >> /etc/hosts
+echo '' > /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '' > /etc/resolv.conf
+echo 'search corp.hq' >> /etc/resolv.conf
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
 
 firewall-cmd --set-default=drop
@@ -143,6 +152,9 @@ firewall-cmd --remove-interface=enp0s8 --zone=public
 firewall-cmd --add-interface=enp0s3 --zone=drop
 firewall-cmd --add-interface=enp0s8 --zone=drop
 firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="192.168.1.180" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.121" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.122" service name="ssh" accept'
+firewall-cmd --permanent --add-rich-rule 'rule family="ipv4" source address="10.0.0.123" service name="ssh" accept'
 firewall-cmd --reload
 firewall-cmd --list-all
 
@@ -167,13 +179,8 @@ yum update -y
 yum install java -y
 
 curl --url https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0-aarch64.tar.gz --output /tmp/hadoop-3.3.0-aarch64.tar.gz
-
-useradd -u 990 -M -U hadoop -s /bin/bash
-
 cp /tmp/hadoop-3.3.0-aarch64.tar.gz /opt/
-
 tar -zxf /opt/hadoop-3.3.0-aarch64.tar.gz -C /opt/
-
 mv /opt/hadoop-3.3.0/ /opt/hadoop/
 
 sed -i 's/^# export JAVA_HOME=/export JAVA_HOME=\//' /opt/hadoop/etc/hadoop/hadoop-env.sh
@@ -183,3 +190,5 @@ HADOOP_HOME=/opt/hadoop
 export HADOOP_HOME
 export PATH=\${PATH}:\${HADOOP_HOME}/bin
 EOF
+
+reboot
