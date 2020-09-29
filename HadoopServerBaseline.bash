@@ -13,9 +13,9 @@ sed -i 's/IPADDR=.*/IPADDR=10.0.0.121/' /etc/sysconfig/network-scripts/ifcfg-enp
 systemctl restart network
 
 echo '' > /etc/hosts
-echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
-echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
-echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq name-node1 nn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq data-node1 dn1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq data-node2 dn2' >> /etc/hosts
 
 echo '' > /etc/resolv.conf
 echo 'search corp.hq' >> /etc/resolv.conf
@@ -62,6 +62,7 @@ useradd -u 1001 -U hadoop -s /bin/bash -m
 su - hadoop
 ssh-keygen -b 2048
 cat /home/hadoop/.ssh/id_rsa.pub > /home/hadoop/.ssh/authorized_keys
+chmod -R 700 /home/hadoop/.ssh
 scp /home/hadoop/.ssh/authorized_keys daniel@n1:/tmp
 scp /home/hadoop/.ssh/authorized_keys daniel@n2:/tmp
 
@@ -77,9 +78,10 @@ sed -i 's/IPADDR=.*/IPADDR=10.0.0.122/' /etc/sysconfig/network-scripts/ifcfg-enp
 systemctl restart network
 
 echo '' > /etc/hosts
-echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
-echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
-echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq name-node1 nn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq data-node1 dn1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq data-node2 dn2' >> /etc/hosts
+
 echo '' > /etc/resolv.conf
 echo 'search corp.hq' >> /etc/resolv.conf
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
@@ -139,9 +141,10 @@ sed -i 's/IPADDR=.*/IPADDR=10.0.0.123/' /etc/sysconfig/network-scripts/ifcfg-enp
 systemctl restart network
 
 echo '' > /etc/hosts
-echo '10.0.0.121 HADOOP1.corp.hq mn1' >> /etc/hosts
-echo '10.0.0.122 HADOOP2.corp.hq n1' >> /etc/hosts
-echo '10.0.0.123 HADOOP3.corp.hq n2' >> /etc/hosts
+echo '10.0.0.121 HADOOP1.corp.hq name-node1 nn1' >> /etc/hosts
+echo '10.0.0.122 HADOOP2.corp.hq data-node1 dn1' >> /etc/hosts
+echo '10.0.0.123 HADOOP3.corp.hq data-node2 dn2' >> /etc/hosts
+
 echo '' > /etc/resolv.conf
 echo 'search corp.hq' >> /etc/resolv.conf
 echo 'nameserver 10.0.0.11' >> /etc/resolv.conf
