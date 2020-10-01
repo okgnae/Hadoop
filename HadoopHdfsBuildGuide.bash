@@ -36,7 +36,7 @@ cat << EOF > /opt/hadoop/etc/hadoop/core-site.xml
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
     <property>
-        <name>fs.default.name</name>
+        <name>fs.defaultFS</name>
         <value>hdfs://name-node1:9000</value>
     </property>
 </configuration>
@@ -163,8 +163,9 @@ hdfs namenode -format
 
 
 ### 
-start-dfs.sh
+start-all.sh
 
 
 ###
-stop-dfs.sh
+stop-all.sh
+
