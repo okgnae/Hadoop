@@ -94,7 +94,7 @@ scp /opt/hadoop/etc/hadoop/workers hadoop@dn1:/opt/hadoop/etc/hadoop/workers
 scp /opt/hadoop/etc/hadoop/workers hadoop@dn2:/opt/hadoop/etc/hadoop/workers
 
 
-### memory settings in yarn-site.xml
+### yarn-site.xml
 cat << EOF > /opt/hadoop/etc/hadoop/yarn-site.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -126,6 +126,10 @@ cat << EOF > /opt/hadoop/etc/hadoop/yarn-site.xml
     <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
+    </property>
+	<property>
+        <name>yarn.resourcemanager.bind-host</name>
+        <value>0.0.0.0</value>
     </property>
 </configuration>
 EOF
@@ -163,9 +167,8 @@ hdfs namenode -format
 
 
 ### 
-start-all.sh
+start-dfs.sh
 
 
 ###
-stop-all.sh
-
+stop-dfs.sh
